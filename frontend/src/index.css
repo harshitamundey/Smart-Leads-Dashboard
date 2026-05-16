@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #050816;
+  --color-primary: #2563EB;
+  --color-secondary: #3B82F6;
+  --color-accent: #60A5FA;
+  
+  --color-dark-100: #1E293B;
+  --color-dark-200: #0F172A;
+  --color-dark-300: #050816;
+
+  --shadow-glow: 0 0 15px rgba(37, 99, 235, 0.3);
+  --shadow-glow-lg: 0 0 25px rgba(37, 99, 235, 0.5);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-background text-slate-200 antialiased;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+.card-glow {
+  @apply hover:shadow-glow transition-all duration-300;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
+}
