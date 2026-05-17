@@ -16,9 +16,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({
   origin: [
     "https://smartleadsdashboard.vercel.app",
-    "http://localhost:5173" // Allow local development as well
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:5175",
+    "http://localhost:5176"
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(helmet());
 if (process.env.NODE_ENV === 'development') {
