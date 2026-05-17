@@ -2,10 +2,12 @@ import axios, { InternalAxiosRequestConfig } from 'axios';
 import { useAuthStore } from '../context/authStore';
 
 const getBaseURL = () => {
-  const url = import.meta.env.VITE_API_URL || import.meta.env.REACT_APP_API_URL;
-  if (!url) return '/api';
-  // Remove trailing slash if exists and append /api
-  return `${url.replace(/\/$/, '')}/api`;
+  const prodUrl = 'https://smart-leads-dashboard-1-7xn0.onrender.com';
+  const envUrl = import.meta.env.VITE_API_URL || import.meta.env.REACT_APP_API_URL;
+  const baseUrl = envUrl || prodUrl;
+  
+  // Return URL ending with /api/
+  return `${baseUrl.replace(/\/$/, '')}/api/`;
 };
 
 const api = axios.create({
@@ -20,6 +22,12 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  
+  // Ensure the URL does not start with a slash when using baseURL
+  if (config.url?.startsWith('/')) {
+    config.url = config.url.substring(1);
+  }
+  
   return config;
 });
 

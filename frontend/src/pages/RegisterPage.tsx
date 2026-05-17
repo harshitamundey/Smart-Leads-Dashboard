@@ -31,7 +31,7 @@ export const RegisterPage = () => {
     setIsLoading(true);
     setError('');
     try {
-      const response = await api.post('/auth/register', data);
+      const response = await api.post('/auth/signup', data);
       setAuth(response.data.data, response.data.data.token);
       navigate('/dashboard');
     } catch (err: any) {
